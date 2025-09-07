@@ -1,0 +1,12 @@
+
+---
+
+## 📦 `requirements.txt` — Exemple minimal
+
+```txt
+tensorflow>=2.12
+numpy
+pandas
+matplotlib
+scikit-learn
+opencv-python
