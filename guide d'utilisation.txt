@@ -1,0 +1,29 @@
+Le dataset utilisé est Stanford Dogs. Sur Kaggle, tu peux le récupérer ainsi :
+bash
+kaggle datasets download -d jessicali9530/stanford-dogs-dataset
+Ensuite, décompresse le fichier :
+bash
+unzip stanford-dogs-dataset.zip -d data/
+📌 Assure-toi d’avoir installé l’API Kaggle et d’avoir configuré ton token (kaggle.json) dans ~/.kaggle/.
+  🐾 Faire une prédiction sur Kaggle
+Si tu exécutes ton notebook de prédiction sur Kaggle :
+
+Charge ton modèle :
+python
+from tensorflow.keras.models import load_model
+model = load_model('/kaggle/input/best-model/best_model.h5')
+Charge une image :
+
+python
+import cv2
+img = cv2.imread('/kaggle/input/test-images/dog.jpg')
+img = cv2.resize(img, (224, 224)) / 255.0
+img = img.reshape(1, 224, 224, 3)
+Prédire les classes :
+
+python
+preds = model.predict(img)
+top5 = preds[0].argsort()[-5:][::-1]
+for i in top5:
+    print(f"{class_names[i]}: {preds[0][i]*100:.2f}%")
+Assure-toi que class_names contient la liste des 120 races dans le bon ordre.
